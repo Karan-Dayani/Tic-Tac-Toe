@@ -7,3 +7,4 @@ playBtn.onclick = () => {
     intro.classList.add("fadeOut");
     game.classList.add("fadeIn");
 }
+97
