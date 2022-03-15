@@ -7,3 +7,5 @@ playBtn.onclick = () => {
     intro.classList.add("fadeOut");
     game.classList.add("fadeIn");
 }
+
+Hello how do you do.
