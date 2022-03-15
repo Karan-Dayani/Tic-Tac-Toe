@@ -86,11 +86,11 @@ div.fadeIn {
 }
 
 .playerX {
-    color: #118df8;
+    color: #feda4a;
 }
 
 .playerO {
-    color: #F68989;
+    color: #feda4a;
 }
 @media (max-width: 600px) {
     .board {
