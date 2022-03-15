@@ -5,6 +5,7 @@ window.addEventListener("DOMContentLoaded", () => {
     var playBtn = document.getElementById("play");
     var intro = document.getElementById("intro");
     var game = document.getElementById("game");
+    var playerDisplay = document.getElementById("playerDisplay")
 
     playBtn.onclick = () => {
     intro.classList.add("fadeOut");
@@ -60,10 +61,10 @@ window.addEventListener("DOMContentLoaded", () => {
     const announce = (type) => {
         switch(type) {
             case PLAYERO_WON:
-                message.innerHTML = "Player O Won";
+                message.innerText = "Player O Won";
                 break;
             case PLAYERX_WON:
-                message.innerHTML = "Player X Won";
+                message.innerText = "Player X Won";
                 break;
             case TIE:
                 message.innerText = "TIE";
@@ -83,10 +84,10 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     const changePlayer = () => {
-        message.classList.remove(`player${currentPlayer}`);
+        playerDisplay.classList.remove(`player${currentPlayer}`);
         currentPlayer = currentPlayer === "X" ? "O" : "X";
-        message.innerText = `it's ${currentPlayer}'s turn.`;
-        message.classList.add(`player${currentPlayer}`);
+        playerDisplay.innerText = `it's ${currentPlayer}'s turn.`;
+        playerDisplay.classList.add(`player${currentPlayer}`);
     }
 
     const userAction = (cell, index) => {
@@ -100,7 +101,8 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     const restartBoard = () => {
-        message.innerText = "";
+        message.innerText = "Result";
+        playerDisplay.innerText = "";
         board = ["", "", "", "", "", "", "", "", ""];
         isGameActive = true;
 
