@@ -3,16 +3,16 @@ var restartBtn = document.getElementById("restart-btn");
 var game = document.getElementById("game");
 var intro = document.getElementById("intro");
 var message = document.getElementById("message");
-var id0 , id1 , id2 , id3 , id4 , id5 , id6 , id7 , id8
-id0 = document.getElementById("0").value
-id1 = document.getElementById("1").value
-id2 = document.getElementById("2").value
-id3 = document.getElementById("3").value
-id4 = document.getElementById("4").value
-id5 = document.getElementById("5").value
-id6 = document.getElementById("6").value
-id7 = document.getElementById("7").value
-id8 = document.getElementById("8").value
+
+var id0 = document.getElementById("0");
+var id1 = document.getElementById("1");
+var id2 = document.getElementById("2");
+var id3 = document.getElementById("3");
+var id4 = document.getElementById("4");
+var id5 = document.getElementById("5");
+var id6 = document.getElementById("6");
+var id7 = document.getElementById("7");
+var id8 = document.getElementById("8");
 
 playBtn.onclick = () => {
     intro.classList.add("fadeOut");
