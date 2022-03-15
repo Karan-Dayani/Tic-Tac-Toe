@@ -84,6 +84,14 @@ div.fadeIn {
     background-color: transparent;
     opacity: 1;
 }
+
+.playerX {
+    color: #118df8;
+}
+
+.playerO {
+    color: #F68989;
+}
 @media (max-width: 600px) {
     .board {
         width: 300px;

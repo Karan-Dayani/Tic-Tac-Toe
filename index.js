@@ -1,47 +1,136 @@
-var playBtn = document.getElementById("play");
-var restartBtn = document.getElementById("restart-btn");
-var game = document.getElementById("game");
-var intro = document.getElementById("intro");
-var message = document.getElementById("message");
-var cells = document.querySelectorAll(".col");
+window.addEventListener("DOMContentLoaded", () => {
+    const cells = Array.from(document.querySelectorAll(".col"));
+    const message = document.getElementById("message");
+    const restartBtn = document.getElementById("restart-btn");
+    var playBtn = document.getElementById("play");
+    var intro = document.getElementById("intro");
+    var game = document.getElementById("game");
 
-var id0 = document.getElementById("0");
-var id1 = document.getElementById("1");
-var id2 = document.getElementById("2");
-var id3 = document.getElementById("3");
-var id4 = document.getElementById("4");
-var id5 = document.getElementById("5");
-var id6 = document.getElementById("6");
-var id7 = document.getElementById("7");
-var id8 = document.getElementById("8");
-
-playBtn.onclick = () => {
+    playBtn.onclick = () => {
     intro.classList.add("fadeOut");
     game.classList.add("fadeIn");
-}
+    }
 
-if((id0 == "X") && (id1 == "X") && (id2 == "X")){
-    message.innerHTML = "X"
-    document.getElementById("id3").disabled = true;
-    document.getElementById("id4").disabled = true;
-    document.getElementById("id5").disabled = true;
-    document.getElementById("id6").disabled = true;
-    document.getElementById("id7").disabled = true;
-    document.getElementById("id8").disabled = true;
-    window.alert('Player X won');
-}
+    let board = ["", "", "", "", "", "", "", "", ""];
+    let currentPlayer = "X";
+    let isGameActive = true;
 
-let count = 1;
-cells.forEach(cell => {
-    cell.onclick = () => {
-        if (count === 1) {
-            cell.innerHTML = "X";
-            cell.disabled = true;
-            count = 0;
-        } else {
-            cell.innerHTML = "O";
-            cell.disabled = true;
-            count = 1;
+    const PLAYERX_WON = "PlayerX_Won";
+    const PLAYERO_WON = "PlayerO_Won";
+    const TIE = "TIE";
+
+    const winningConditions = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+    ];
+
+    function handleResultValidation() {
+        let roundWon = false;
+        for (let i = 0; i <= 7; i++) {
+            const winCondition = winningConditions[i];
+            const a = board[winCondition[0]];
+            const b = board[winCondition[1]];
+            const c = board[winCondition[2]];
+            if (a === "" || b === "" || c === "") {
+                continue;
+            }
+            if (a === b && b === c) {
+                roundWon = true;
+                break;
+            }
+        }
+
+        if (roundWon) {
+            announce(currentPlayer === "X" ? PLAYERX_WON : PLAYERO_WON);
+            isGameActive = false;
+            return;
+        }
+
+        if (!board.includes("")) {
+            announce(TIE);
         }
     }
+
+    const announce = (type) => {
+        switch(type) {
+            case PLAYERO_WON:
+                message.innerHTML = "Player O Won";
+                break;
+            case PLAYERX_WON:
+                message.innerHTML = "Player X Won";
+                break;
+            case TIE:
+                message.innerText = "TIE";
+        }
+    }
+
+    const isValidAction = (cell) => {
+        if (cell.innerText === "X" || cell.innerText === "O") {
+            return false;
+        }
+
+        return true;
+    }
+
+    const updateBoard = (index) => {
+        board[index] = currentPlayer;
+    }
+
+    const changePlayer = () => {
+        message.classList.remove(`player${currentPlayer}`);
+        currentPlayer = currentPlayer === "X" ? "O" : "X";
+        message.innerText = `it's ${currentPlayer}'s turn.`;
+        message.classList.add(`player${currentPlayer}`);
+    }
+
+    const userAction = (cell, index) => {
+        if (isValidAction(cell) && isGameActive) {
+            cell.innerText = currentPlayer;
+            cell.classList.add(`player${currentPlayer}`);
+            updateBoard(index);
+            handleResultValidation();
+            changePlayer();
+        }
+    }
+
+    const restartBoard = () => {
+        message.innerText = "";
+        board = ["", "", "", "", "", "", "", "", ""];
+        isGameActive = true;
+
+        if (currentPlayer === "O") {
+            changePlayer();
+        }
+
+        cells.forEach(cell => {
+            cell.innerText = "";
+            cell.classList.remove("playerX");
+            cell.classList.remove("playerO");
+        });
+    }
+
+    cells.forEach( (cell, index) => {
+        cell.addEventListener("click", () => userAction(cell, index));
+    });
+
+
+    restartBtn.addEventListener("click", restartBoard);
 });
+
+
+
+
+
+// var restartBtn = document.getElementById("restart-btn");
+
+
+// var message = document.getElementById("message");
+// var cells = document.querySelectorAll(".col");
+
+
