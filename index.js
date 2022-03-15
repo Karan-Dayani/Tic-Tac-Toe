@@ -3,6 +3,7 @@ var restartBtn = document.getElementById("restart-btn");
 var game = document.getElementById("game");
 var intro = document.getElementById("intro");
 var message = document.getElementById("message");
+var cells = document.querySelectorAll(".col");
 
 var id0 = document.getElementById("0");
 var id1 = document.getElementById("1");
@@ -30,3 +31,17 @@ if((id0 == "X") && (id1 == "X") && (id2 == "X")){
     window.alert('Player X won');
 }
 
+let count = 1;
+cells.forEach(cell => {
+    cell.onclick = () => {
+        if (count === 1) {
+            cell.innerHTML = "X";
+            cell.disabled = true;
+            count = 0;
+        } else {
+            cell.innerHTML = "O";
+            cell.disabled = true;
+            count = 1;
+        }
+    }
+});
