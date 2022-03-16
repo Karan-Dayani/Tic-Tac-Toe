@@ -7,11 +7,14 @@ window.addEventListener("DOMContentLoaded", () => {
     let currentPlayer = "X"
 
     function changePlayer() {
+        playerDisplay.classList.remove(`player${currentPlayer}`);
         if (currentPlayer === "X") {
             currentPlayer = "O";
         } else {
             currentPlayer = "X";
         }
+        playerDisplay.innerHTML = currentPlayer;
+        playerDisplay.classList.add(`player${currentPlayer}`);
     }
 
     checkWinner = (board) => {
@@ -56,10 +59,20 @@ window.addEventListener("DOMContentLoaded", () => {
             tile.classList.add(`player${currentPlayer}`);
             let result = checkWinner(board)
             if (result) {
-                console.log(result + " is the winner")
+                announcer.classList.remove("hide");
+                if (result === "DRAW") {
+                    announcer.innerHTML = result;
+                } else {
+                    announcer.innerHTML = result + " is the winner"
+                }
+                // console.log(result + " is the winner")
             } else {
                 changePlayer();
             }
         });
+    });
+
+    reset.addEventListener("click", () => {
+        
     });
 });
