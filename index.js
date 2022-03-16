@@ -43,9 +43,9 @@ window.addEventListener("DOMContentLoaded", () => {
             return currentPlayer
         } else if (check8.size == 1 && !(check8.has(-1))) {
             return currentPlayer
-        }else if (!board.includes(-1)){
+        } else if (!board.includes(-1)){
             return "DRAW"
-        }else{
+        } else{
             return false
         }
     }
@@ -63,9 +63,8 @@ window.addEventListener("DOMContentLoaded", () => {
                 if (result === "DRAW") {
                     announcer.innerHTML = result;
                 } else {
-                    announcer.innerHTML = result + " is the winner"
+                    announcer.innerHTML = result + " is the Winner";
                 }
-                // console.log(result + " is the winner")
             } else {
                 changePlayer();
             }
@@ -73,6 +72,6 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     reset.addEventListener("click", () => {
-        
+        window.location.reload();
     });
 });
