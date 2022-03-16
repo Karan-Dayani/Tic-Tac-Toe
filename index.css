@@ -74,3 +74,7 @@
     margin-left: 1em;
     cursor: pointer;
 }
+
+.point{
+    pointer-events: none;
+}
